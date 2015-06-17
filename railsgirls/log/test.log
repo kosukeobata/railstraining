@@ -1,0 +1,109 @@
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "ideas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "description" text, "picture" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.9ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150527083329')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "ideas"[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "ideas" ("name", "description", "picture", "created_at", "updated_at", "id") VALUES ('MyString', 'MyText', 'MyString', '2015-06-17 06:09:25', '2015-06-17 06:09:25', 980190962)
+  [1m[36mFixture Insert (0.0ms)[0m  [1mINSERT INTO "ideas" ("name", "description", "picture", "created_at", "updated_at", "id") VALUES ('MyString', 'MyText', 'MyString', '2015-06-17 06:09:25', '2015-06-17 06:09:25', 298486374)[0m
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+IdeasControllerTest: test_should_update_idea
+--------------------------------------------
+  [1m[35mIdea Load (0.2ms)[0m  SELECT  "ideas".* FROM "ideas" WHERE "ideas"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by IdeasController#update as HTML
+  Parameters: {"idea"=>{"description"=>"MyText", "name"=>"MyString", "picture"=>"/uploads/idea/picture/980190962/MyString"}, "id"=>"980190962"}
+  [1m[36mIdea Load (0.1ms)[0m  [1mSELECT  "ideas".* FROM "ideas" WHERE "ideas"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mIdea Load (0.1ms)[0m  [1mSELECT  "ideas".* FROM "ideas" WHERE "ideas"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35mSQL (0.3ms)[0m  UPDATE "ideas" SET "picture" = ?, "updated_at" = ? WHERE "ideas"."id" = ?  [["picture", "MyString"], ["updated_at", "2015-06-17 06:09:26.085108"], ["id", 980190962]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/ideas/980190962
+Completed 302 Found in 14ms (ActiveRecord: 0.6ms)
+  [1m[35m (0.4ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+------------------------------------------
+IdeasControllerTest: test_should_show_idea
+------------------------------------------
+  [1m[35mIdea Load (0.1ms)[0m  SELECT  "ideas".* FROM "ideas" WHERE "ideas"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by IdeasController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mIdea Load (0.0ms)[0m  [1mSELECT  "ideas".* FROM "ideas" WHERE "ideas"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  Rendered ideas/show.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 1265ms (Views: 1264.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+------------------------------------------
+IdeasControllerTest: test_should_get_index
+------------------------------------------
+  [1m[35mIdea Load (0.1ms)[0m  SELECT  "ideas".* FROM "ideas" WHERE "ideas"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by IdeasController#index as HTML
+  [1m[36mIdea Load (0.3ms)[0m  [1mSELECT "ideas".* FROM "ideas"[0m
+  Rendered ideas/index.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 11ms (Views: 10.2ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+-----------------------------------------
+IdeasControllerTest: test_should_get_edit
+-----------------------------------------
+  [1m[35mIdea Load (0.1ms)[0m  SELECT  "ideas".* FROM "ideas" WHERE "ideas"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by IdeasController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mIdea Load (0.0ms)[0m  [1mSELECT  "ideas".* FROM "ideas" WHERE "ideas"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  Rendered ideas/_form.html.erb (36.4ms)
+  Rendered ideas/edit.html.erb within layouts/application (50.9ms)
+Completed 200 OK in 55ms (Views: 54.5ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+IdeasControllerTest: test_should_create_idea
+--------------------------------------------
+  [1m[35mIdea Load (0.1ms)[0m  SELECT  "ideas".* FROM "ideas" WHERE "ideas"."id" = ? LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "ideas"[0m
+Processing by IdeasController#create as HTML
+  Parameters: {"idea"=>{"description"=>"MyText", "name"=>"MyString", "picture"=>"/uploads/idea/picture/980190962/MyString"}}
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "ideas" ("name", "description", "picture", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "MyString"], ["description", "MyText"], ["picture", nil], ["created_at", "2015-06-17 06:09:27.438180"], ["updated_at", "2015-06-17 06:09:27.438180"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/ideas/980190963
+Completed 302 Found in 3ms (ActiveRecord: 0.6ms)
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "ideas"[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+----------------------------------------
+IdeasControllerTest: test_should_get_new
+----------------------------------------
+  [1m[35mIdea Load (0.1ms)[0m  SELECT  "ideas".* FROM "ideas" WHERE "ideas"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by IdeasController#new as HTML
+  Rendered ideas/_form.html.erb (5.0ms)
+  Rendered ideas/new.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 11ms (Views: 11.0ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+---------------------------------------------
+IdeasControllerTest: test_should_destroy_idea
+---------------------------------------------
+  [1m[36mIdea Load (0.1ms)[0m  [1mSELECT  "ideas".* FROM "ideas" WHERE "ideas"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "ideas"
+Processing by IdeasController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mIdea Load (0.5ms)[0m  [1mSELECT  "ideas".* FROM "ideas" WHERE "ideas"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "ideas" WHERE "ideas"."id" = ?[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/ideas
+Completed 302 Found in 2ms (ActiveRecord: 0.8ms)
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "ideas"[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+-----------------------------------------
+PagesControllerTest: test_should_get_info
+-----------------------------------------
+Processing by PagesController#info as HTML
+  Rendered pages/info.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 5ms (Views: 4.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
